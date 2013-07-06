@@ -118,10 +118,10 @@ Copyright (c) 2013 Asser Chiu, released under the [MIT license][].
 
 <!-- Figures -->
 
-[fig_serverType]: ../images/fig_serverType.png "fig_serverType"
-[fig_serverTech]: ../images/fig_serverTech.png "fig_serverTech"
-[fig_rawData]: ../images/fig_rawData.png "fig_rawData"
-[fig_cubism]: ../images/fig_cubism.png "fig_cubism"
+[fig_serverType]: ./images/fig_serverType.png "fig_serverType"
+[fig_serverTech]: ./images/fig_serverTech.png "fig_serverTech"
+[fig_rawData]: ./images/fig_rawData.png "fig_rawData"
+[fig_cubism]: ./images/fig_cubism.png "fig_cubism"
 
 <!-- Links -->
 
