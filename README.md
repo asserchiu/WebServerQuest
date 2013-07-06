@@ -112,7 +112,7 @@ Shortcuts
 ------------------------------------------------------------------------
 
 - Overall performance: [server dashboard](http://localhost:1081/)
-- Dashboard with chosen facts: [demo dashboard](../html/monitor.html)
+- Dashboard with chosen facts: [demo dashboard](./html/monitor.html)
 
 Copyright (c) 2013 Asser Chiu, released under the [MIT license][].
 
