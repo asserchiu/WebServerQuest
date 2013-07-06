@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Web Server Quest",
   "description": "Play the game, unveil the web.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "icons": {
     "128": "images/icon128.png"
   },
