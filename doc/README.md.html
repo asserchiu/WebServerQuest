@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>README.md</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "", thisFile = "README.md", defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#web%20server%20quest">Web Server Quest</a>
+      </div>
+      <div class="heading h2">
+        <a href="#preface">Preface</a>
+      </div>
+      <div class="heading h2">
+        <a href="#what%20can%20you%20get%20after%20using%20web%20server%20quest%3F">What can you get after using Web Server Quest?</a>
+      </div>
+      <div class="heading h3">
+        <a href="#statistic%20collected%20locally%3A%20(display%20with%20pop-up%20window)">Statistic collected locally: (display with pop-up window)</a>
+      </div>
+      <div class="heading h3">
+        <a href="#after%20uploaded%20to%20a%20cube%20server%3A">After uploaded to a Cube server:</a>
+      </div>
+      <div class="heading h2">
+        <a href="#what%20do%20we%20log%3F">What do we log?</a>
+      </div>
+      <div class="heading h2">
+        <a href="#how%20to%20promote%3F">How to promote?</a>
+      </div>
+      <div class="heading h2">
+        <a href="#permissions%20and%20data%20policy">Permissions and Data Policy</a>
+      </div>
+      <div class="heading h2">
+        <a href="#acknowledgment%20and%20license(s)">Acknowledgment and License(s)</a>
+      </div>
+      <div class="heading h3">
+        <a href="#web%20server%20quest%20was%20inspired%20by%3A">Web Server Quest was inspired by:</a>
+      </div>
+      <div class="heading h3">
+        <a href="#web%20server%20quest%20google%20chrome%20extension%20uses%3A">Web Server Quest Google Chrome extension uses:</a>
+      </div>
+      <div class="heading h3">
+        <a href="#this%20document%20is%20generated%20with">This document is generated with</a>
+      </div>
+      <div class="heading h2">
+        <a href="#shortcuts">Shortcuts</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="docs markdown">
+<div class="pilwrap" id="web%20server%20quest">
+  <h1>
+    <a href="#web%20server%20quest" name="web%20server%20quest" class="pilcrow">&#182;</a>
+    Web Server Quest
+  </h1>
+</div>
+
+
+<p>Web Server Quest is a Google Chrome extension that record and count up
+ your activities on requesting web pages. It can summarize the count of
+ web server types and technologies used by each page request.</p>
+
+<p>You can also use existed or setup your own <a href="http://square.github.io/cube/" title="Cube">Cube</a> server that helps
+ you record each request and deriving metrics. With the help of Cube,
+ you can make richer analysis in <em>post-hoc</em> manner, such as quantiles
+ and histograms of arbitrary event sets.</p>
+
+<p>For the future work, we are going to provide a mini roll playing game
+ that makes it more fun for end users.</p>
+
+
+<div class="pilwrap" id="preface">
+  <h2>
+    <a href="#preface" name="preface" class="pilcrow">&#182;</a>
+    Preface
+  </h2>
+</div>
+
+
+<p>In recent years, researches and web analytic tools help web developers
+ get to know their user. Such as the popularity of the browsers and OSs.
+ However, there are few tools for us to understand how these excellent
+ web sites built on and how the web get composited.</p>
+
+<p>To get to know the web, we have to collect server properties from all
+ popular web servers that distributed all over the world. Instead of
+ setting up dozens of crawlers walking through the web, we adopt
+ crowd-sourced computing model for user orientated statistics.</p>
+
+
+<div class="pilwrap" id="what%20can%20you%20get%20after%20using%20web%20server%20quest%3F">
+  <h2>
+    <a href="#what%20can%20you%20get%20after%20using%20web%20server%20quest%3F" name="what%20can%20you%20get%20after%20using%20web%20server%20quest%3F" class="pilcrow">&#182;</a>
+    What can you get after using Web Server Quest?
+  </h2>
+</div>
+
+
+
+<div class="pilwrap" id="statistic%20collected%20locally%3A%20(display%20with%20pop-up%20window)">
+  <h3>
+    <a href="#statistic%20collected%20locally%3A%20(display%20with%20pop-up%20window)" name="statistic%20collected%20locally%3A%20(display%20with%20pop-up%20window)" class="pilcrow">&#182;</a>
+    Statistic collected locally: (display with pop-up window)
+  </h3>
+</div>
+
+
+<ul>
+<li>Total number for each
+<ul><li>Web server types (<code>serverType</code>)</li>
+<li>Application stack types (<code>serverTech</code>)</li></ul></li>
+</ul>
+
+<p><img src="../images/fig_rawData.png" alt="fig_rawData" title="fig_rawData" /></p>
+
+<ul>
+<li>Diagrams for historical events of each
+<ul><li>Web server types (<code>serverType</code>)</li>
+<li>Application stack types (<code>serverTech</code>)</li></ul></li>
+</ul>
+
+<p><img src="../images/fig_serverType.png" alt="fig_serverType" title="fig_serverType" />
+<img src="../images/fig_serverTech.png" alt="fig_serverTech" title="fig_serverTech" /></p>
+
+
+<div class="pilwrap" id="after%20uploaded%20to%20a%20cube%20server%3A">
+  <h3>
+    <a href="#after%20uploaded%20to%20a%20cube%20server%3A" name="after%20uploaded%20to%20a%20cube%20server%3A" class="pilcrow">&#182;</a>
+    After uploaded to a <a href="http://square.github.io/cube/" title="Cube">Cube</a> server:
+  </h3>
+</div>
+
+
+<ul>
+<li>Overall page popularity</li>
+<li>Overall domain popularity</li>
+<li>Overall web server popularity</li>
+<li>Overall application stack popularity</li>
+<li>... and more</li>
+</ul>
+
+<p><img src="../images/fig_cubism.png" alt="fig_cubism" title="fig_cubism" /></p>
+
+
+<div class="pilwrap" id="what%20do%20we%20log%3F">
+  <h2>
+    <a href="#what%20do%20we%20log%3F" name="what%20do%20we%20log%3F" class="pilcrow">&#182;</a>
+    What do we log?
+  </h2>
+</div>
+
+
+<ul>
+<li>Time-stamps</li>
+<li>Response status code</li>
+<li>For each document request, we record the URL string without <code>#</code> part,
+which meant to be an anchor. We can now get the domain name and
+"some" detail about each request.</li>
+<li>Web server type (<code>serverType</code>)</li>
+<li>Application stack type (<code>serverTech</code>)</li>
+<li><strong>Future work:</strong> Host OS type</li>
+<li><strong>Future work:</strong> Users' Nationality by their IP or other libraries</li>
+</ul>
+
+
+<div class="pilwrap" id="how%20to%20promote%3F">
+  <h2>
+    <a href="#how%20to%20promote%3F" name="how%20to%20promote%3F" class="pilcrow">&#182;</a>
+    How to promote?
+  </h2>
+</div>
+
+
+<blockquote>
+  <p>Play the game, unveil the web.</p>
+</blockquote>
+
+<p>That is, Gamification!</p>
+
+<p>We are going to provide a mini RPG game in the future.</p>
+
+
+<div class="pilwrap" id="permissions%20and%20data%20policy">
+  <h2>
+    <a href="#permissions%20and%20data%20policy" name="permissions%20and%20data%20policy" class="pilcrow">&#182;</a>
+    Permissions and Data Policy
+  </h2>
+</div>
+
+
+<ul>
+<li>This extension monitor and record user's browsing activity locally
+for counting and plotting.</li>
+<li>Browsing event will send to <code>localhost</code> by default,
+you can change it to other trusted servers.</li>
+<li><strong>Future work:</strong> Local storage for
+<ul><li>settings</li>
+<li>statistics</li>
+<li>game save data</li></ul></li>
+</ul>
+
+
+<div class="pilwrap" id="acknowledgment%20and%20license(s)">
+  <h2>
+    <a href="#acknowledgment%20and%20license(s)" name="acknowledgment%20and%20license(s)" class="pilcrow">&#182;</a>
+    Acknowledgment and License(s)
+  </h2>
+</div>
+
+
+
+<div class="pilwrap" id="web%20server%20quest%20was%20inspired%20by%3A">
+  <h3>
+    <a href="#web%20server%20quest%20was%20inspired%20by%3A" name="web%20server%20quest%20was%20inspired%20by%3A" class="pilcrow">&#182;</a>
+    Web Server Quest was inspired by:
+  </h3>
+</div>
+
+
+<ul>
+<li><a href="https://github.com/cyril/web_server_notifier" title="Web Server Notifier">Web Server Notifier</a> (<a href="http://opensource.org/licenses/MIT" title="MIT license">MIT License</a>)</li>
+<li><a href="https://github.com/cyril/web_technology_notifier" title="Web Technology Notifier">Web Technology Notifier</a> (<a href="http://opensource.org/licenses/MIT" title="MIT license">MIT License</a>)</li>
+</ul>
+
+
+<div class="pilwrap" id="web%20server%20quest%20google%20chrome%20extension%20uses%3A">
+  <h3>
+    <a href="#web%20server%20quest%20google%20chrome%20extension%20uses%3A" name="web%20server%20quest%20google%20chrome%20extension%20uses%3A" class="pilcrow">&#182;</a>
+    Web Server Quest Google Chrome extension uses:
+  </h3>
+</div>
+
+
+<ul>
+<li><a href="http://dygraphs.com/" title="dygraphs">dygraphs</a> (<a href="http://opensource.org/licenses/MIT" title="MIT license">MIT License</a>)</li>
+<li><a href="http://square.github.io/cubism/" title="Cubism.js">Cubism.js</a> (<a href="http://www.apache.org/licenses/LICENSE-2.0.html" title="Apache License">Apache License</a>)
+<ul><li><a href="http://d3js.org/" title="D3.js">D3.js</a> (<a href="http://opensource.org/licenses/BSD-3-Clause" title="BSD license">BSD License</a>)</li></ul></li>
+</ul>
+
+
+<div class="pilwrap" id="this%20document%20is%20generated%20with">
+  <h3>
+    <a href="#this%20document%20is%20generated%20with" name="this%20document%20is%20generated%20with" class="pilcrow">&#182;</a>
+    This document is generated with
+  </h3>
+</div>
+
+
+<ul>
+<li><a href="http://jbt.github.io/docker/" title="Docker">Docker</a></li>
+</ul>
+
+<p>For detailed parameters, please take a look in <code>Makefile</code>.</p>
+
+
+<div class="pilwrap" id="shortcuts">
+  <h2>
+    <a href="#shortcuts" name="shortcuts" class="pilcrow">&#182;</a>
+    Shortcuts
+  </h2>
+</div>
+
+
+<ul>
+<li>Overall performance: <a href="http://localhost:1081/">server dashboard</a></li>
+<li>Dashboard with chosen facts: <a href="../html/monitor.html">demo dashboard</a></li>
+</ul>
+
+<p>Copyright (c) 2013 Asser Chiu, released under the <a href="http://opensource.org/licenses/MIT" title="MIT license">MIT license</a>.</p>
+
+<!-- Figures -->
+
+<!-- Links -->
+
+<!-- Licenses --></div>
+  </div>
+</body>
+</html>

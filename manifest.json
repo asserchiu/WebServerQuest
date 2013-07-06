@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "Web Server Quest",
+  "description": "Play the game, unveil the web.",
+  "version": "0.1.0",
+  "icons": {
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": {
+      // "19": "images/icon19.png",
+      // "38": "images/icon38.png"
+      "19": "images/icon128.png",
+      "38": "images/icon128.png"
+    },
+    "default_title": "Web Server Quest",
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "scripts": ["js/background.js"]
+    // "page": "html/background.html"
+  },
+  "content_scripts": [{
+    "js": ["js/document_start_notifier.js"],
+    "matches": ["http://*/*", "https://*/*"],
+    "run_at": "document_start"
+  }]
+}

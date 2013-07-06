@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<title>Web Server Quest Monitor</title>
+<style>
+  @import url(../css/style.css);
+</style>
+<select id="step">
+  <option value="1e4">10 seconds</option>
+  <option value="6e4">1 minute</option>
+  <option value="3e5">5 minutes</option>
+  <option value="36e5">1 hour</option>
+  <option value="864e5">1 day</option>
+</select>
+<script src="../lib/d3.v3.min.js"></script>
+<script src="../lib/cubism.v1.min.js"></script>
+<script>
+  host = "http://localhost:1081";
+  //
+  var step = +cubism.option("step", 1e4),
+    offset = +cubism.option("offset", 0);
+
+  //
+  var context = cubism.context()
+    .step(step)
+    // .size(1440)
+    // .size(1080)
+    .size(window.innerWidth)
+    // .size(document.body.clientWidth)
+    .serverDelay(offset);
+
+  //
+  var cube = context.cube(host);
+  // var requests = cube.metric("sum(request)");
+
+  // Add top and bottom axes to display the time.
+  d3.select("body").selectAll(".axis")
+    .data(["top", "bottom"])
+    .enter().append("div")
+    .attr("class", function(d) {
+      return d + " axis";
+    })
+    .each(function(d) {
+      d3.select(this).call(context.axis().ticks(12).orient(d));
+    });
+
+  // Add a mouseover rule.
+  d3.select("body").append("div")
+    .attr("class", "rule")
+    .call(context.rule());
+
+  // plot performance metrics
+  d3.select("body").insert("div", ".bottom")
+    .attr("class", "group")
+    .call(function() {
+      this.append("header").text("[log server performance]");
+    })
+    .selectAll(".horizon")
+    .data([{
+      title: "load",
+      metric: cube.metric("sum(cube_compute(ms))").divide(step)
+    }, {
+      title: "median latency (ms)",
+      metric: cube.metric("median(cube_compute(ms))")
+    }])
+    .enter().append("div")
+    .attr("class", "horizon")
+    .call(context.horizon()
+      .title(function(d) {
+        return d.title;
+      })
+      .metric(function(d) {
+        return d.metric;
+      }));
+
+  // // plot incoming events (/s) metircs
+  // d3.json(host + "/1.0/types", function(types) {
+  //   d3.select("body").insert("div", ".bottom")
+  //       .attr("class", "group")
+  //       .call(function() { this.append("header").text("incoming events (/s)"); })
+  //     .selectAll(".horizon")
+  //       .data(types)
+  //     .enter().append("div")
+  //       .attr("class", "horizon")
+  //     .call(context.horizon()
+  //       .metric(function(d) { return cube.metric("sum(" + d + ")").divide(step / 1e3); }));
+  // });
+
+  // plot aggregated web_server_quest metrics
+  d3.select("body").insert("div", ".bottom")
+    .attr("class", "group")
+    .call(function() {
+      this.append("header").text("[web_server_quest]");
+    })
+    .selectAll(".horizon")
+    .data([{
+      title: "all data",
+      metric: cube.metric("sum(web_server_quest)")
+    }, {
+      title: ".ge(status, 400).lt(status, 500))",
+      metric: cube.metric("sum(web_server_quest.ge(status, 400).lt(status, 500))")
+    }, {
+      title: ".eq(location.protocol, 'http:')",
+      metric: cube.metric("sum(web_server_quest.eq(location.protocol, 'http:'))")
+    }, {
+      title: ".eq(location.protocol, 'https:')",
+      metric: cube.metric("sum(web_server_quest.eq(location.protocol, 'https:'))")
+    }, {
+      title: ".eq(serverType.name, 'Apache')",
+      metric: cube.metric("sum(web_server_quest.eq(serverType.name, 'Apache'))")
+    }, {
+      title: ".eq(serverType.name, 'Apache').eq(serverTech.name, 'PHP')",
+      metric: cube.metric("sum(web_server_quest.eq(serverType.name, 'Apache').eq(serverTech.name, 'PHP'))")
+    }, {
+      title: ".eq(serverType.name, 'nginx')",
+      metric: cube.metric("sum(web_server_quest.eq(serverType.name, 'nginx'))")
+    }, {
+      title: ".eq(serverType.name, 'nginx').eq(serverTech.name, 'PHP')",
+      metric: cube.metric("sum(web_server_quest.eq(serverType.name, 'nginx').eq(serverTech.name, 'PHP'))")
+    }])
+    .enter().append("div")
+    .attr("class", "horizon")
+    .call(context.horizon()
+      .title(function(d) {
+        return d.title;
+      })
+      .metric(function(d) {
+        return d.metric;
+      }));
+
+  // On mousemove, reposition the chart values to match the rule.
+  context.on("focus", function(i) {
+    d3.selectAll(".value").style("right", i == null ? null : context.size() - i + "px");
+  });
+
+  // Initialize the step menu's selection.
+  d3.selectAll("#step option").property("selected", function() {
+    return this.value == step;
+  });
+
+  // Update the location on step change.
+  d3.select("#step").on("change", function() {
+    window.location = "?step=" + this.value + "&" + location.search.replace(/[?&]step=[^&]*(&|$)/g, "$1").substring(1);
+  });
+</script>

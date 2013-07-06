@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style type="text/css">
+    body {
+      width: 540px;
+      overflow-x: hidden;
+    }
+    code {
+      white-space: nowrap;
+    }
+    .dygraph-legend {
+      left: 60px !important;
+      background-color: transparent !important;
+      font-size: 10px !important;
+    }
+    .dygraph-legend > span.highlight {
+      border: 1px solid rgb(128, 128, 128);
+    }
+  </style>
+  <!-- <script type="text/javascript" src="http://dygraphs.com/dygraph-combined.js"></script> -->
+  <script type="text/javascript" src="../lib/dygraph-combined.js"></script>
+  <script type="text/javascript" src="../js/popup.js"></script>
+</head>
+
+<body>
+  <p>
+    You found a(n)
+    <code id="monsName">Ghost</code>with
+    <code id="monsTech">Nothing</code>in hand.
+  </p>
+  <div>
+    <label>
+      rawData.display(
+      <input type="checkbox" name="showRawData" id="showRawData">)
+      <hr>
+    </label>
+    <div id="rawData">
+      <pre id="countByServerType"></pre>
+      <hr>
+      <pre id="countByServerTech"></pre>
+    </div>
+  </div>
+  <div id="graph">
+    graphType:
+    <label>
+      <input type="radio" name="graphType" id="serverType" value="serverType">serverType
+    </label>
+    <label>
+      <input type="radio" name="graphType" id="serverTech" value="serverTech">serverTech
+    </label>
+    <div id="plot" class="dygraph-plot"></div>
+    <div id="legend" class="dygraph-legend"></div>
+  </div>
+</body>
+
+</html>

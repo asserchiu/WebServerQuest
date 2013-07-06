@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>monitor.html</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "html/monitor.html", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>monitor.html</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><a class="line-num" href="#line-1" id="line-1">1</a>  <span class="cp">&lt;!DOCTYPE html&gt;</span>
+<a class="line-num" href="#line-2" id="line-2">2</a>  <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;</span>
+<a class="line-num" href="#line-3" id="line-3">3</a>  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content=</span><span class="s">&quot;initial-scale=1, maximum-scale=1&quot;</span><span class="nt">&gt;</span>
+<a class="line-num" href="#line-4" id="line-4">4</a>  <span class="nt">&lt;title&gt;</span>Web Server Quest Monitor<span class="nt">&lt;/title&gt;</span>
+<a class="line-num" href="#line-5" id="line-5">5</a>  <span class="nt">&lt;style&gt;</span>
+<a class="line-num" href="#line-6" id="line-6">6</a>    <span class="k">@import</span> <span class="nt">url</span><span class="o">(../</span><span class="nt">css</span><span class="o">/</span><span class="nt">style</span><span class="nc">.css</span><span class="o">)</span><span class="p">;</span>
+<a class="line-num" href="#line-7" id="line-7">7</a>  <span class="nt">&lt;/style&gt;</span>
+<a class="line-num" href="#line-8" id="line-8">8</a>  <span class="nt">&lt;select</span> <span class="na">id=</span><span class="s">&quot;step&quot;</span><span class="nt">&gt;</span>
+<a class="line-num" href="#line-9" id="line-9">9</a>    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;1e4&quot;</span><span class="nt">&gt;</span>10 seconds<span class="nt">&lt;/option&gt;</span>
+<a class="line-num" href="#line-10" id="line-10">10</a>    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;6e4&quot;</span><span class="nt">&gt;</span>1 minute<span class="nt">&lt;/option&gt;</span>
+<a class="line-num" href="#line-11" id="line-11">11</a>    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;3e5&quot;</span><span class="nt">&gt;</span>5 minutes<span class="nt">&lt;/option&gt;</span>
+<a class="line-num" href="#line-12" id="line-12">12</a>    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;36e5&quot;</span><span class="nt">&gt;</span>1 hour<span class="nt">&lt;/option&gt;</span>
+<a class="line-num" href="#line-13" id="line-13">13</a>    <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">&quot;864e5&quot;</span><span class="nt">&gt;</span>1 day<span class="nt">&lt;/option&gt;</span>
+<a class="line-num" href="#line-14" id="line-14">14</a>  <span class="nt">&lt;/select&gt;</span>
+<a class="line-num" href="#line-15" id="line-15">15</a>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;../lib/d3.v3.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<a class="line-num" href="#line-16" id="line-16">16</a>  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;../lib/cubism.v1.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<a class="line-num" href="#line-17" id="line-17">17</a>  <span class="nt">&lt;script&gt;</span>
+<a class="line-num" href="#line-18" id="line-18">18</a>    <span class="nx">host</span> <span class="o">=</span> <span class="s2">&quot;http://localhost:1081&quot;</span><span class="p">;</span>
+<a class="line-num" href="#line-19" id="line-19">19</a>    <span class="c1">//</span>
+<a class="line-num" href="#line-20" id="line-20">20</a>    <span class="kd">var</span> <span class="nx">step</span> <span class="o">=</span> <span class="o">+</span><span class="nx">cubism</span><span class="p">.</span><span class="nx">option</span><span class="p">(</span><span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="nx">e4</span><span class="p">),</span>
+<a class="line-num" href="#line-21" id="line-21">21</a>      <span class="nx">offset</span> <span class="o">=</span> <span class="o">+</span><span class="nx">cubism</span><span class="p">.</span><span class="nx">option</span><span class="p">(</span><span class="s2">&quot;offset&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<a class="line-num" href="#line-22" id="line-22">22</a>  
+<a class="line-num" href="#line-23" id="line-23">23</a>    <span class="c1">//</span>
+<a class="line-num" href="#line-24" id="line-24">24</a>    <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">cubism</span><span class="p">.</span><span class="nx">context</span><span class="p">()</span>
+<a class="line-num" href="#line-25" id="line-25">25</a>      <span class="p">.</span><span class="nx">step</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span>
+<a class="line-num" href="#line-26" id="line-26">26</a>      <span class="c1">// .size(1440)</span>
+<a class="line-num" href="#line-27" id="line-27">27</a>      <span class="c1">// .size(1080)</span>
+<a class="line-num" href="#line-28" id="line-28">28</a>      <span class="p">.</span><span class="nx">size</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">innerWidth</span><span class="p">)</span>
+<a class="line-num" href="#line-29" id="line-29">29</a>      <span class="c1">// .size(document.body.clientWidth)</span>
+<a class="line-num" href="#line-30" id="line-30">30</a>      <span class="p">.</span><span class="nx">serverDelay</span><span class="p">(</span><span class="nx">offset</span><span class="p">);</span>
+<a class="line-num" href="#line-31" id="line-31">31</a>  
+<a class="line-num" href="#line-32" id="line-32">32</a>    <span class="c1">//</span>
+<a class="line-num" href="#line-33" id="line-33">33</a>    <span class="kd">var</span> <span class="nx">cube</span> <span class="o">=</span> <span class="nx">context</span><span class="p">.</span><span class="nx">cube</span><span class="p">(</span><span class="nx">host</span><span class="p">);</span>
+<a class="line-num" href="#line-34" id="line-34">34</a>    <span class="c1">// var requests = cube.metric(&quot;sum(request)&quot;);</span>
+<a class="line-num" href="#line-35" id="line-35">35</a>  
+<a class="line-num" href="#line-36" id="line-36">36</a>    <span class="c1">// Add top and bottom axes to display the time.</span>
+<a class="line-num" href="#line-37" id="line-37">37</a>    <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">).</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">&quot;.axis&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-38" id="line-38">38</a>      <span class="p">.</span><span class="nx">data</span><span class="p">([</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="s2">&quot;bottom&quot;</span><span class="p">])</span>
+<a class="line-num" href="#line-39" id="line-39">39</a>      <span class="p">.</span><span class="nx">enter</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-40" id="line-40">40</a>      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-41" id="line-41">41</a>        <span class="k">return</span> <span class="nx">d</span> <span class="o">+</span> <span class="s2">&quot; axis&quot;</span><span class="p">;</span>
+<a class="line-num" href="#line-42" id="line-42">42</a>      <span class="p">})</span>
+<a class="line-num" href="#line-43" id="line-43">43</a>      <span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-44" id="line-44">44</a>        <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">call</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">axis</span><span class="p">().</span><span class="nx">ticks</span><span class="p">(</span><span class="mi">12</span><span class="p">).</span><span class="nx">orient</span><span class="p">(</span><span class="nx">d</span><span class="p">));</span>
+<a class="line-num" href="#line-45" id="line-45">45</a>      <span class="p">});</span>
+<a class="line-num" href="#line-46" id="line-46">46</a>  
+<a class="line-num" href="#line-47" id="line-47">47</a>    <span class="c1">// Add a mouseover rule.</span>
+<a class="line-num" href="#line-48" id="line-48">48</a>    <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-49" id="line-49">49</a>      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s2">&quot;rule&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-50" id="line-50">50</a>      <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">rule</span><span class="p">());</span>
+<a class="line-num" href="#line-51" id="line-51">51</a>  
+<a class="line-num" href="#line-52" id="line-52">52</a>    <span class="c1">// plot performance metrics</span>
+<a class="line-num" href="#line-53" id="line-53">53</a>    <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">).</span><span class="nx">insert</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="s2">&quot;.bottom&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-54" id="line-54">54</a>      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s2">&quot;group&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-55" id="line-55">55</a>      <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<a class="line-num" href="#line-56" id="line-56">56</a>        <span class="k">this</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;[log server performance]&quot;</span><span class="p">);</span>
+<a class="line-num" href="#line-57" id="line-57">57</a>      <span class="p">})</span>
+<a class="line-num" href="#line-58" id="line-58">58</a>      <span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">&quot;.horizon&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-59" id="line-59">59</a>      <span class="p">.</span><span class="nx">data</span><span class="p">([{</span>
+<a class="line-num" href="#line-60" id="line-60">60</a>        <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;load&quot;</span><span class="p">,</span>
+<a class="line-num" href="#line-61" id="line-61">61</a>        <span class="nx">metric</span><span class="o">:</span> <span class="nx">cube</span><span class="p">.</span><span class="nx">metric</span><span class="p">(</span><span class="s2">&quot;sum(cube_compute(ms))&quot;</span><span class="p">).</span><span class="nx">divide</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span>
+<a class="line-num" href="#line-62" id="line-62">62</a>      <span class="p">},</span> <span class="p">{</span>
+<a class="line-num" href="#line-63" id="line-63">63</a>        <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;median latency (ms)&quot;</span><span class="p">,</span>
+<a class="line-num" href="#line-64" id="line-64">64</a>        <span class="nx">metric</span><span class="o">:</span> <span class="nx">cube</span><span class="p">.</span><span class="nx">metric</span><span class="p">(</span><span class="s2">&quot;median(cube_compute(ms))&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-65" id="line-65">65</a>      <span class="p">}])</span>
+<a class="line-num" href="#line-66" id="line-66">66</a>      <span class="p">.</span><span class="nx">enter</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-67" id="line-67">67</a>      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s2">&quot;horizon&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-68" id="line-68">68</a>      <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">horizon</span><span class="p">()</span>
+<a class="line-num" href="#line-69" id="line-69">69</a>        <span class="p">.</span><span class="nx">title</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-70" id="line-70">70</a>          <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span>
+<a class="line-num" href="#line-71" id="line-71">71</a>        <span class="p">})</span>
+<a class="line-num" href="#line-72" id="line-72">72</a>        <span class="p">.</span><span class="nx">metric</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-73" id="line-73">73</a>          <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">metric</span><span class="p">;</span>
+<a class="line-num" href="#line-74" id="line-74">74</a>        <span class="p">}));</span>
+<a class="line-num" href="#line-75" id="line-75">75</a>  
+<a class="line-num" href="#line-76" id="line-76">76</a>    <span class="c1">// // plot incoming events (/s) metircs</span>
+<a class="line-num" href="#line-77" id="line-77">77</a>    <span class="c1">// d3.json(host + &quot;/1.0/types&quot;, function(types) {</span>
+<a class="line-num" href="#line-78" id="line-78">78</a>    <span class="c1">//   d3.select(&quot;body&quot;).insert(&quot;div&quot;, &quot;.bottom&quot;)</span>
+<a class="line-num" href="#line-79" id="line-79">79</a>    <span class="c1">//       .attr(&quot;class&quot;, &quot;group&quot;)</span>
+<a class="line-num" href="#line-80" id="line-80">80</a>    <span class="c1">//       .call(function() { this.append(&quot;header&quot;).text(&quot;incoming events (/s)&quot;); })</span>
+<a class="line-num" href="#line-81" id="line-81">81</a>    <span class="c1">//     .selectAll(&quot;.horizon&quot;)</span>
+<a class="line-num" href="#line-82" id="line-82">82</a>    <span class="c1">//       .data(types)</span>
+<a class="line-num" href="#line-83" id="line-83">83</a>    <span class="c1">//     .enter().append(&quot;div&quot;)</span>
+<a class="line-num" href="#line-84" id="line-84">84</a>    <span class="c1">//       .attr(&quot;class&quot;, &quot;horizon&quot;)</span>
+<a class="line-num" href="#line-85" id="line-85">85</a>    <span class="c1">//     .call(context.horizon()</span>
+<a class="line-num" href="#line-86" id="line-86">86</a>    <span class="c1">//       .metric(function(d) { return cube.metric(&quot;sum(&quot; + d + &quot;)&quot;).divide(step / 1e3); }));</span>
+<a class="line-num" href="#line-87" id="line-87">87</a>    <span class="c1">// });</span>
+<a class="line-num" href="#line-88" id="line-88">88</a>  
+<a class="line-num" href="#line-89" id="line-89">89</a>    <span class="c1">// plot aggregated web_server_quest metrics</span>
+<a class="line-num" href="#line-90" id="line-90">90</a>    <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">).</span><span class="nx">insert</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="s2">&quot;.bottom&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-91" id="line-91">91</a>      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s2">&quot;group&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-92" id="line-92">92</a>      <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<a class="line-num" href="#line-93" id="line-93">93</a>        <span class="k">this</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s2">&quot;[web_server_quest]&quot;</span><span class="p">);</span>
+<a class="line-num" href="#line-94" id="line-94">94</a>      <span class="p">})</span>
+<a class="line-num" href="#line-95" id="line-95">95</a>      <span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">&quot;.horizon&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-96" id="line-96">96</a>      <span class="p">.</span><span class="nx">data</span><span class="p">([{</span>
+<a class="line-num" href="#line-97" id="line-97">97</a>        <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;all data&quot;</span><span class="p">,</span>
+<a class="line-num" href="#line-98" id="line-98">98</a>        <span class="nx">metric</span><span class="o">:</span> <span class="nx">cube</span><span class="p">.</span><span class="nx">metric</span><span class="p">(</span><span class="s2">&quot;sum(web_server_quest)&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-99" id="line-99">99</a>      <span class="p">},</span> <span class="p">{</span>
+<a class="line-num" href="#line-100" id="line-100">100</a>        <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;.ge(status, 400).lt(status, 500))&quot;</span><span class="p">,</span>
+<a class="line-num" href="#line-101" id="line-101">101</a>        <span class="nx">metric</span><span class="o">:</span> <span class="nx">cube</span><span class="p">.</span><span class="nx">metric</span><span class="p">(</span><span class="s2">&quot;sum(web_server_quest.ge(status, 400).lt(status, 500))&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-102" id="line-102">102</a>      <span class="p">},</span> <span class="p">{</span>
+<a class="line-num" href="#line-103" id="line-103">103</a>        <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;.eq(location.protocol, &#39;http:&#39;)&quot;</span><span class="p">,</span>
+<a class="line-num" href="#line-104" id="line-104">104</a>        <span class="nx">metric</span><span class="o">:</span> <span class="nx">cube</span><span class="p">.</span><span class="nx">metric</span><span class="p">(</span><span class="s2">&quot;sum(web_server_quest.eq(location.protocol, &#39;http:&#39;))&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-105" id="line-105">105</a>      <span class="p">},</span> <span class="p">{</span>
+<a class="line-num" href="#line-106" id="line-106">106</a>        <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;.eq(location.protocol, &#39;https:&#39;)&quot;</span><span class="p">,</span>
+<a class="line-num" href="#line-107" id="line-107">107</a>        <span class="nx">metric</span><span class="o">:</span> <span class="nx">cube</span><span class="p">.</span><span class="nx">metric</span><span class="p">(</span><span class="s2">&quot;sum(web_server_quest.eq(location.protocol, &#39;https:&#39;))&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-108" id="line-108">108</a>      <span class="p">},</span> <span class="p">{</span>
+<a class="line-num" href="#line-109" id="line-109">109</a>        <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;.eq(serverType.name, &#39;Apache&#39;)&quot;</span><span class="p">,</span>
+<a class="line-num" href="#line-110" id="line-110">110</a>        <span class="nx">metric</span><span class="o">:</span> <span class="nx">cube</span><span class="p">.</span><span class="nx">metric</span><span class="p">(</span><span class="s2">&quot;sum(web_server_quest.eq(serverType.name, &#39;Apache&#39;))&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-111" id="line-111">111</a>      <span class="p">},</span> <span class="p">{</span>
+<a class="line-num" href="#line-112" id="line-112">112</a>        <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;.eq(serverType.name, &#39;Apache&#39;).eq(serverTech.name, &#39;PHP&#39;)&quot;</span><span class="p">,</span>
+<a class="line-num" href="#line-113" id="line-113">113</a>        <span class="nx">metric</span><span class="o">:</span> <span class="nx">cube</span><span class="p">.</span><span class="nx">metric</span><span class="p">(</span><span class="s2">&quot;sum(web_server_quest.eq(serverType.name, &#39;Apache&#39;).eq(serverTech.name, &#39;PHP&#39;))&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-114" id="line-114">114</a>      <span class="p">},</span> <span class="p">{</span>
+<a class="line-num" href="#line-115" id="line-115">115</a>        <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;.eq(serverType.name, &#39;nginx&#39;)&quot;</span><span class="p">,</span>
+<a class="line-num" href="#line-116" id="line-116">116</a>        <span class="nx">metric</span><span class="o">:</span> <span class="nx">cube</span><span class="p">.</span><span class="nx">metric</span><span class="p">(</span><span class="s2">&quot;sum(web_server_quest.eq(serverType.name, &#39;nginx&#39;))&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-117" id="line-117">117</a>      <span class="p">},</span> <span class="p">{</span>
+<a class="line-num" href="#line-118" id="line-118">118</a>        <span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;.eq(serverType.name, &#39;nginx&#39;).eq(serverTech.name, &#39;PHP&#39;)&quot;</span><span class="p">,</span>
+<a class="line-num" href="#line-119" id="line-119">119</a>        <span class="nx">metric</span><span class="o">:</span> <span class="nx">cube</span><span class="p">.</span><span class="nx">metric</span><span class="p">(</span><span class="s2">&quot;sum(web_server_quest.eq(serverType.name, &#39;nginx&#39;).eq(serverTech.name, &#39;PHP&#39;))&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-120" id="line-120">120</a>      <span class="p">}])</span>
+<a class="line-num" href="#line-121" id="line-121">121</a>      <span class="p">.</span><span class="nx">enter</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;div&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-122" id="line-122">122</a>      <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="s2">&quot;horizon&quot;</span><span class="p">)</span>
+<a class="line-num" href="#line-123" id="line-123">123</a>      <span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">horizon</span><span class="p">()</span>
+<a class="line-num" href="#line-124" id="line-124">124</a>        <span class="p">.</span><span class="nx">title</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-125" id="line-125">125</a>          <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span>
+<a class="line-num" href="#line-126" id="line-126">126</a>        <span class="p">})</span>
+<a class="line-num" href="#line-127" id="line-127">127</a>        <span class="p">.</span><span class="nx">metric</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-128" id="line-128">128</a>          <span class="k">return</span> <span class="nx">d</span><span class="p">.</span><span class="nx">metric</span><span class="p">;</span>
+<a class="line-num" href="#line-129" id="line-129">129</a>        <span class="p">}));</span>
+<a class="line-num" href="#line-130" id="line-130">130</a>  
+<a class="line-num" href="#line-131" id="line-131">131</a>    <span class="c1">// On mousemove, reposition the chart values to match the rule.</span>
+<a class="line-num" href="#line-132" id="line-132">132</a>    <span class="nx">context</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;focus&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+<a class="line-num" href="#line-133" id="line-133">133</a>      <span class="nx">d3</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">&quot;.value&quot;</span><span class="p">).</span><span class="nx">style</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="nx">i</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="kc">null</span> <span class="o">:</span> <span class="nx">context</span><span class="p">.</span><span class="nx">size</span><span class="p">()</span> <span class="o">-</span> <span class="nx">i</span> <span class="o">+</span> <span class="s2">&quot;px&quot;</span><span class="p">);</span>
+<a class="line-num" href="#line-134" id="line-134">134</a>    <span class="p">});</span>
+<a class="line-num" href="#line-135" id="line-135">135</a>  
+<a class="line-num" href="#line-136" id="line-136">136</a>    <span class="c1">// Initialize the step menu&#39;s selection.</span>
+<a class="line-num" href="#line-137" id="line-137">137</a>    <span class="nx">d3</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">&quot;#step option&quot;</span><span class="p">).</span><span class="nx">property</span><span class="p">(</span><span class="s2">&quot;selected&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<a class="line-num" href="#line-138" id="line-138">138</a>      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">==</span> <span class="nx">step</span><span class="p">;</span>
+<a class="line-num" href="#line-139" id="line-139">139</a>    <span class="p">});</span>
+<a class="line-num" href="#line-140" id="line-140">140</a>  
+<a class="line-num" href="#line-141" id="line-141">141</a>    <span class="c1">// Update the location on step change.</span>
+<a class="line-num" href="#line-142" id="line-142">142</a>    <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;#step&quot;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;change&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<a class="line-num" href="#line-143" id="line-143">143</a>      <span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s2">&quot;?step=&quot;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">+</span> <span class="s2">&quot;&amp;&quot;</span> <span class="o">+</span> <span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[?&amp;]step=[^&amp;]*(&amp;|$)/g</span><span class="p">,</span> <span class="s2">&quot;$1&quot;</span><span class="p">).</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<a class="line-num" href="#line-144" id="line-144">144</a>    <span class="p">});</span>
+<a class="line-num" href="#line-145" id="line-145">145</a>  <span class="nt">&lt;/script&gt;</span>
+<a class="line-num" href="#line-146" id="line-146">146</a>  </pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
