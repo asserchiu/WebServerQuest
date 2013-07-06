@@ -102,7 +102,7 @@ Acknowledgment and License(s)
 - [Cubism.js][] ([Apache License][])
     - [D3.js][] ([BSD License][])
 
-### This document is generated with
+### The document can be generate with
 
 - [Docker][]
 
